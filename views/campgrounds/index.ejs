@@ -1,0 +1,33 @@
+<% layout('/layouts/boilerplate') %>
+    <h1>All Campgrounds</h1>
+    <div>
+        <a href="/campgrounds/new">Add New Campground</a>
+    </div>
+    <% campgrounds.sort((a,b)=>{ %>
+    <% const titleA=a.title.toUpperCase(); %>
+    <% const titleB=b.title.toUpperCase(); %>
+    <% if (titleA < titleB) return -1; %>
+    <% if (titleA> titleB) return 1; %>
+    <% return 0; %>
+    <% }) %>
+    <% for (let campground of campgrounds) { %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="/campgrounds/<%=campground.id%>">
+                    <img class="img-fluid" src="<%= campground.image %> " alt="">
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><a class="text-decoration-none link-dark" href="/campgrounds/<%=campground.id%>"><%= campground.title %></a></h5>
+                        <p class="card-text"><%= campground.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted"><%= campground.location %></small>
+                        </p>
+                        <a class="btn btn-primary" href="/campgrounds/<%=campground.id%>">View <%= campground.title %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
