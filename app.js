@@ -11,6 +11,7 @@ const Campground = require('./models/campground');
 const Review = require('./models/review');
 const morgan = require('morgan');
 const app = express();
+const sheltersRouter = require('./routes/shelters');
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
     useNewUrlParser: true,
@@ -31,6 +32,9 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(morgan('tiny'));
+
+//USING EXPRESS ROUTER
+app.use('/shelters', sheltersRouter);
 
 //Backend Validator Middlewares
 const validateCampground = (req, res, next) => {
