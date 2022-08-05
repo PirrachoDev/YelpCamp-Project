@@ -13,6 +13,8 @@
 <body class="d-flex flex-column vh-100">
     <%- include('../partials/navbar')%>
         <main class="container mt-5">
+            <!-- 'success' is a local variable coming from res.locals.XXX -->
+            <%= success %> 
             <%- body %>
         </main>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
