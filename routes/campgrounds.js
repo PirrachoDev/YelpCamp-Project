@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const asyncCatcher = require('../utils/AsyncCatcher');
 const ExpressError = require('../utils/ExpressError');
 const Campground = require('../models/campground');
