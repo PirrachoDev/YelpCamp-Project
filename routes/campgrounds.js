@@ -4,6 +4,7 @@ const asyncCatcher = require('../utils/AsyncCatcher');
 const ExpressError = require('../utils/ExpressError');
 const Campground = require('../models/campground');
 const { JoiCampgroundSchema } = require('../JoiSchemas');
+const isLoggedIn = require('../middleware');
 
 //Backend Validator Middlewares
 const validateCampground = (req, res, next) => {
@@ -23,12 +24,12 @@ router.get('/', asyncCatcher(async (req, res) => {
 }));
 
 //ADD-FORM
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('campgrounds/new');
 })
 
 //CREATE
-router.post('/', validateCampground, asyncCatcher(async (req, res, next) => {
+router.post('/', isLoggedIn, validateCampground, asyncCatcher(async (req, res, next) => {
     // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400);
     const newCamp = new Campground(req.body.campground);
     await newCamp.save();
@@ -47,7 +48,7 @@ router.get('/:id', asyncCatcher(async (req, res) => {
 }))
 
 //EDIT-FORM
-router.get('/:id/edit', asyncCatcher(async (req, res) => {
+router.get('/:id/edit', isLoggedIn, asyncCatcher(async (req, res) => {
     const campground = await Campground.findById(req.params.id);
     if (!campground) {
         req.flash('error', 'Cannot find that campground!');
@@ -57,7 +58,7 @@ router.get('/:id/edit', asyncCatcher(async (req, res) => {
 }))
 
 //UPDATE
-router.put('/:id', validateCampground, asyncCatcher(async (req, res) => {
+router.put('/:id', isLoggedIn, validateCampground, asyncCatcher(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
     req.flash('success', 'Successfully updated campground!');
@@ -65,10 +66,11 @@ router.put('/:id', validateCampground, asyncCatcher(async (req, res) => {
 }))
 
 //DELETE
-router.delete('/:id', asyncCatcher(async (req, res) => {
+router.delete('/:id', isLoggedIn, asyncCatcher(async (req, res) => {
     const { id } = req.params;
     await Campground.findByIdAndDelete(id);
     res.redirect('/campgrounds');
 }))
+
 
 module.exports = router;
