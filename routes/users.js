@@ -3,20 +3,10 @@ const passport = require('passport');
 const router = express.Router();
 const User = require('../models/user');
 const asyncCatcher = require('../utils/AsyncCatcher');
-const isLoggedIn = require('../middleware');
-const { JoiUserSchema } = require('../JoiSchemas');
+const { isLoggedIn, validateUser } = require('../middleware');
 const ExpressError = require('../utils/ExpressError');
 
-//Validator Middleware
-const validateUser = (req, res, next) => {
-    const { error } = JoiUserSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-}
+
 
 router.get('/register', (req, res) => {
     res.render('users/register');
@@ -43,9 +33,11 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 })
 
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), asyncCatcher(async (req, res) => {
+router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login', keepSessionInfo: true }), asyncCatcher(async (req, res) => {
     req.flash('success', `Welcome back ${req.body.username}!`);
-    res.redirect('/campgrounds');
+    const redirectUrl = req.session.returnTo || '/campgrounds';
+    delete req.session.returnTo;
+    res.redirect(redirectUrl);
 }))
 
 router.get('/logout', isLoggedIn, (req, res, next) => {

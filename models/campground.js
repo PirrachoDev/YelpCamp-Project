@@ -14,6 +14,10 @@ const CampgroundSchema = new Schema({
         default: 'This is just the default text in case you leave the field empty'
     },
     location: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,

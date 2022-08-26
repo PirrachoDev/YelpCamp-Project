@@ -17,6 +17,7 @@ module.exports.JoiReviewSchema = Joi.object({
     }).required()
 })
 
+//I made this just to try
 module.exports.JoiUserSchema = Joi.object({
     username: Joi.string().required().min(4),
     password: Joi.string().required().min(8),

@@ -4,18 +4,9 @@ const asyncCatcher = require('../utils/AsyncCatcher');
 const ExpressError = require('../utils/ExpressError');
 const Campground = require('../models/campground');
 const Review = require('../models/review');
-const { JoiReviewSchema } = require('../JoiSchemas');
+const { validateReview } = require('../middleware');
 
-//Backend validators
-const validateReview = (req, res, next) => {
-    const { error } = JoiReviewSchema.validate(req.body);
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
-    } else {
-        next();
-    }
-}
+
 
 //CREATE REVIEW
 router.post('/', validateReview, asyncCatcher(async (req, res) => {
