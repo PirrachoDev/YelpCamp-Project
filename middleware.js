@@ -1,5 +1,6 @@
 const Campground = require('./models/campground');
 const Review = require('./models/review');
+const ExpressError = require('./utils/ExpressError');
 const { JoiCampgroundSchema, JoiUserSchema, JoiReviewSchema } = require('./JoiSchemas');
 
 
@@ -15,8 +16,12 @@ module.exports.isLoggedIn = (req, res, next) => {
 module.exports.validateReview = (req, res, next) => {
     const { error } = JoiReviewSchema.validate(req.body);
     if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
+        // const msg = error.details.map(el => el.message).join(',');
+        // throw new ExpressError(msg, 400);
+
+        req.flash('error', error.message);
+        res.redirect(`/campgrounds/${req.params.id}`);
+
     } else {
         next();
     }
