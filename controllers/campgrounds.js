@@ -11,8 +11,10 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createCampground = async (req, res, next) => {
     const newCamp = new Campground(req.body.campground);
+    newCamp.images = req.files.map(file => ({ url: file.path, filename: file.filename }));
     newCamp.author = req.user._id;
     await newCamp.save();
+    console.log(newCamp);
     req.flash('success', 'Successfully made a new campground');
     res.redirect(`/campgrounds/${newCamp._id}`);
 }
@@ -25,11 +27,12 @@ module.exports.showCampground = async (req, res) => {
                 path: 'author'
             }
         })
-        .populate('author');
+        .populate('author');    //THIS IS CAMPGROUND AUTHOR
     if (!campground) {
         req.flash('error', 'Cannot find that campground!');
         return res.redirect('/campgrounds');
     }
+    console.log(campground.images);
     res.render('campgrounds/show', { campground });
 }
 

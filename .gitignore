@@ -4,3 +4,6 @@ node_modules
 #Imagenes
 *.jpg
 *.png
+
+#Environment variables file
+.env

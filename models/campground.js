@@ -4,10 +4,12 @@ const Schema = mongoose.Schema;
 
 const CampgroundSchema = new Schema({
     title: String,
-    image: {
-        type: String,
-        default: 'https://source.unsplash.com/collection/483251'
-    },
+    images: [
+        {
+            url: String,
+            filename: String
+        }
+    ],
     price: Number,
     description: {
         type: String,
