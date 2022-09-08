@@ -5,6 +5,7 @@ const { isAuthor, isLoggedIn, validateCampground } = require('../middleware');
 const campgroundController = require('../controllers/campgrounds');
 const multer = require('multer');
 const { storage } = require('../cloudinary/index');
+
 const upload = multer({ storage });
 
 router.route('/')
@@ -16,7 +17,7 @@ router.get('/new', isLoggedIn, campgroundController.renderNewForm);
 
 router.route('/:id')
     .get(asyncCatcher(campgroundController.showCampground)) // SHOW
-    .put(isLoggedIn, isAuthor, validateCampground, asyncCatcher(campgroundController.updateCampground)) // UPDATE
+    .put(isLoggedIn, isAuthor, upload.array('image'), validateCampground, asyncCatcher(campgroundController.updateCampground)) // UPDATE
     .delete(isLoggedIn, isAuthor, asyncCatcher(campgroundController.deleteCampground)) // DELETE
 
 //EDIT-FORM
