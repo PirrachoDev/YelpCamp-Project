@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\controllers"
   ],
-  "SelectedNode": "\\app.js",
+  "SelectedNode": "\\controllers\\campgrounds.js",
   "PreviewInSolutionExplorer": false
 }

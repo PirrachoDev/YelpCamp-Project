@@ -56,7 +56,6 @@ module.exports.updateCampground = async (req, res) => {
             await cloudinary.uploader.destroy(filename);
         }
         await campground.updateOne({ $pull: { images: { filename: { $in: req.body.deleteImages } } } });
-        console.log(campground);
     }
     req.flash('success', 'Successfully updated campground!');
     res.redirect(`/campgrounds/${campground.id}`);

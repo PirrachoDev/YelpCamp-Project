@@ -4,7 +4,7 @@ module.exports.renderRegisterForm = (req, res) => {
     res.render('users/register');
 }
 
-module.exports.register = async (req, res) => {
+module.exports.register = async (req, res, next) => {
     try {
         const { username, email, password } = req.body;
         const user = new User({ username, email });
@@ -14,9 +14,14 @@ module.exports.register = async (req, res) => {
             req.flash('success', 'Welcome to Yelp Camp!');
             res.redirect('/campgrounds');
         })
-    } catch (err) {
-        req.flash('error', err.message);
-        res.redirect('/register');
+    } catch (error) {
+        if (error.keyPattern && error.keyPattern.email === 1) {
+            req.flash('error', 'It seems like that email is already registered');
+            res.redirect('/register');
+        } else {
+            req.flash('error', error.message);
+            res.redirect('/register');
+        }
     }
 
 }
