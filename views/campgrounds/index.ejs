@@ -1,4 +1,5 @@
 <% layout('/layouts/boilerplate') %>
+<div id="map" style="width: 100%; height: 500px"></div>
     <h1>All Campgrounds</h1>
     <% campgrounds.sort((a,b)=>{ %>
     <% const titleA=a.title.toUpperCase(); %>
@@ -12,7 +13,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <a href="/campgrounds/<%=campground.id%>">
-                    <img class="img-fluid" src="<%= campground.images[0].url %>" alt="">
+                    <% if (campground.images.length) {%> 
+                        <img class="img-fluid" src="<%= campground.images[0].url %>" alt="">
+                    <% } else { %> 
+                        <img class="img-fluid" 
+                        src="https://res.cloudinary.com/pirrachodev/image/upload/v1662004504/YelpCamp/wsjczux4lplrd59npshr.png" 
+                        alt="default image">
+                    <% } %> 
                     </a>
                 </div>
                 <div class="col-md-8">
@@ -28,3 +35,7 @@
             </div>
         </div>
     <% } %>
+<script>
+    const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+</script>
+<script src="JS/clusterMap.js"></script>
