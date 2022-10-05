@@ -2,3 +2,9 @@ ERROR:
 Flow:
 New Campground/Edit/etc >> RenderLogin (automatic) >> ANY OTHER PAGE >> Manually Login (RenderLogin) >> 
 >> ERROR TAKES YOU TO New Campground/Edit/etc
+
+BUG:
+Middleware: validateCampground
+Description:
+When used on the edit campground form and there's a Joi validation error, it takes you to /campgrounds/new
+instead of sending you back to the same edit form

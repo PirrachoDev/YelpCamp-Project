@@ -10,6 +10,8 @@ map.on('style.load', () => {
     map.setFog({}); // Set the default atmosphere style
 });
 
+map.addControl(new mapboxgl.NavigationControl());
+
 
 // Set marker options.
 const marker = new mapboxgl.Marker({ color: '#000000', draggable: true })
