@@ -8,6 +8,11 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Email is required!'],
         unique: true
+    },
+    role: {
+        type: String,
+        enum: ['ADMIN', 'USER', 'MODERATOR'],
+        default: 'USER'
     }
 });
 

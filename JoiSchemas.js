@@ -45,5 +45,6 @@ module.exports.JoiReviewSchema = Joi.object({
 module.exports.JoiUserSchema = Joi.object({
     username: Joi.string().required().min(4),
     password: Joi.string().required().min(8),
-    email: Joi.string().required()
+    email: Joi.string().required(),
+    role: Joi.string()
 })
