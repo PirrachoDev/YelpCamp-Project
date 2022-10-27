@@ -1,4 +1,26 @@
 <% layout('/layouts/boilerplate') %>
 <div class="container">
-    
+    <h2 class="text-center">Users</h2>
+    <div class="row">
+        <div class="col-md-8 offset-md-2 col-xs-12">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th scope="col">Username</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    <% for (let user of users) { %> 
+                        <tr scope = "row">
+                            <td><a href="/users/<%= user._id %>"><%= user.username %></a></td>
+                            <td><%= user.email %></td>
+                            <td><%= user.role %></td>
+                            <td><a href="/users/<%= user._id %>/edit">Edit</a>||<a href="#">Delete</a></td>
+                        </tr>
+                    <% } %> 
+                </table>
+            </div>
+        </div>
+    </div>
 </div>

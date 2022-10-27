@@ -1,9 +1,12 @@
 #Node Modules
 node_modules
+.vs
+.vscode
 
 #Imagenes
 *.jpg
 *.png
+*.gif
 
 #Environment variables file
 .env

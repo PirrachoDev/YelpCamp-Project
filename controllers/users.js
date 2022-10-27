@@ -1,5 +1,65 @@
 const User = require('../models/user');
 
+module.exports.index = async (req, res) => {
+    const users = await User.find({});
+    res.render('users/index', { users });
+}
+
+module.exports.renderEditForm = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+        if (!user) {
+            req.flash('error', 'User could not be found...');
+            res.redirect('/users')
+        } else {
+            res.render('users/edit', { user })
+        }
+    }
+    catch (error) {
+        //Hay un area de oportunidad, podria mostrarse un mejor mensaje para error de cast
+        req.flash('error', error.message);
+        res.redirect('/users');
+    }
+}
+
+module.exports.showUser = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const user = await User.findById(id);
+        if (!user) {
+            req.flash('error', 'User could not be found...');
+            res.redirect('/users')
+        } else {
+            res.render('users/show', { user })
+        }
+    }
+    catch (error) {
+        //Hay un area de oportunidad, podria mostrarse un mejor mensaje para error de cast
+        req.flash('error', error.message);
+        res.redirect('/users');
+    }
+}
+
+module.exports.updateUser = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        await User.findByIdAndUpdate(id, req.body);
+        const user = await User.findById(id);
+        console.log(user);
+        req.flash('success', 'User info updated');
+        res.redirect('/campgrounds');
+    }
+    catch (error) {
+        next(error);
+    }
+}
+
+module.exports.deleteUser = (req, res) => {
+    req.flash('error', 'User deleted');
+    res.redirect('/users');
+}
+
 module.exports.renderRegisterForm = (req, res) => {
     res.render('users/register');
 }
@@ -36,6 +96,7 @@ module.exports.login = async (req, res) => {
     delete req.session.returnTo;
     res.redirect(redirectUrl);
 }
+
 module.exports.logout = (req, res, next) => {
     req.logout((error) => {
         if (error) {
@@ -46,3 +107,4 @@ module.exports.logout = (req, res, next) => {
     });
 
 }
+

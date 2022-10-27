@@ -1,0 +1,55 @@
+<% layout('layouts/boilerplate') %> 
+
+<div class="container justify-content-center align-items-center my-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+            <div class="card shadow">
+                <img src="https://res.cloudinary.com/pirrachodev/image/upload/v1665715619/YelpCamp/b7oubmncxj0ycmpszjei.jpg" 
+                    alt="mountain"
+                    class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">User Information</h5>
+                    <form action="/users/<%= user._id %>?_method=PUT" method="POST" class="validated-form" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Username</label>
+                            <input class="form-control" type="text" id="username" name="username" value="<%= user.username %>" autofocus required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter a valid username.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="email" id="email" name="email" value="<%= user.email %>" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter a valid email.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="role">Role</label>
+                            <select class="form-select" name="role" aria-label="Default select example">
+                                <option value="USER">User</option>
+                                <option value="MODERATOR">Moderator</option>
+                                <option value="ADMIN">Administrator</option>
+                              </select>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="invalid-feedback">
+                                Please enter a valid password.
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-success">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
