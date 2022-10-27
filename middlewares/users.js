@@ -19,6 +19,33 @@ module.exports.grantAccess = async (req, res, next) => {
 
 }
 
+module.exports.isAuthorized = (action) => {
+    return (req, res, next) => {
+        const role = req.user.role;
+        const { userId } = req.params;
+        if (req.user._id.equals(userId)) {
+            next();
+        } else {
+            switch (role) {
+                case "MODERATOR":
+                    const userRights = ['UPDATE', 'SHOW'];
+                    if (!userRights.includes(action)) {
+                        req.flash('error', 'You are not authorized.');
+                        return res.redirect(`/users/${req.user._id}`);
+                    }
+                    next();
+                    break;
+                case "ADMIN":
+                    next()
+                    break;
+                default:
+                    req.flash('error', 'You are not authorized.');
+                    return res.redirect(`/users/${req.user._id}`);
+            }
+        }
+    }
+}
+
 module.exports.isProtected = (authLevel) => {
     return (req, res, next) => {
         switch (authLevel) {

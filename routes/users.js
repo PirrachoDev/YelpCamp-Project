@@ -3,20 +3,20 @@ const passport = require('passport');
 const router = express.Router();
 const asyncCatcher = require('../utils/AsyncCatcher');
 const { isLoggedIn, validateUser } = require('../middleware');
-const { grantAccess, isProtected } = require('../middlewares/users');
+const { isAuthorized } = require('../middlewares/users');
 
 const userController = require('../controllers/users');
 
 router.route('/users') //ADD MIDDLEWARE AUTH LATER
-    .get(isLoggedIn, isProtected('MODERATOR'), asyncCatcher(userController.index))
+    .get(isLoggedIn, isAuthorized('SHOW'), asyncCatcher(userController.index))
 
-router.route('/users/:id')
-    .get(isLoggedIn, asyncCatcher(userController.showUser))
-    .put(isLoggedIn, userController.updateUser)
-    .delete(userController.deleteUser)
+router.route('/users/:userId')
+    .get(isLoggedIn, isAuthorized('SHOW'), asyncCatcher(userController.showUser))
+    .put(isLoggedIn, isAuthorized('UPDATE'), userController.updateUser)
+    .delete(isLoggedIn, isAuthorized('DELETE'), userController.deleteUser)
 
-router.route('/users/:id/edit')
-    .get(isLoggedIn, userController.renderEditForm)
+router.route('/users/:userId/edit')
+    .get(isLoggedIn, isAuthorized('SHOW'), userController.renderEditForm)
 
 router.route('/register')
     .get(userController.renderRegisterForm)

@@ -7,8 +7,8 @@ module.exports.index = async (req, res) => {
 
 module.exports.renderEditForm = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const user = await User.findById(id);
+        const { userId } = req.params;
+        const user = await User.findById(userId);
         if (!user) {
             req.flash('error', 'User could not be found...');
             res.redirect('/users')
@@ -25,8 +25,8 @@ module.exports.renderEditForm = async (req, res, next) => {
 
 module.exports.showUser = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const user = await User.findById(id);
+        const { userId } = req.params;
+        const user = await User.findById(userId);
         if (!user) {
             req.flash('error', 'User could not be found...');
             res.redirect('/users')
@@ -43,9 +43,9 @@ module.exports.showUser = async (req, res, next) => {
 
 module.exports.updateUser = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        await User.findByIdAndUpdate(id, req.body);
-        const user = await User.findById(id);
+        const { userId } = req.params;
+        await User.findByIdAndUpdate(userId, req.body);
+        const user = await User.findById(userId);
         console.log(user);
         req.flash('success', 'User info updated');
         res.redirect('/campgrounds');

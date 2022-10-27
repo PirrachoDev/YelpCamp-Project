@@ -16,7 +16,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/campgrounds/new">New Campground</a>
                 </li>
-                <% if (currentUser && currentUser.role == 'ADMIN')  {%>
+                <% if (currentUser && (currentUser.role == 'ADMIN' || currentUser.role == 'MODERATOR'))  {%>
                     <li class="nav-item">
                         <a class="nav-link" href="/users">Users</a>
                     </li>
