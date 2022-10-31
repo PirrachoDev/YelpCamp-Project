@@ -48,35 +48,3 @@ const seedDB = async () => {
 seedDB().then(() => {
     mongoose.connection.close()
 });
-
-roleSchema.pre('save', function (next) {
-    const role = this;
-    const auth = {};
-    switch (role.role) {
-        case 'USER':
-            auth = {
-                READ: ['SELF'],
-                UPDATE: ['SELF'],
-                DELETE: ['SELF']
-            }
-            break;
-        case 'MODERATOR':
-            auth = {
-                READ: ['SELF', 'OTHER'],
-                UPDATE: ['SELF', 'OTHER'],
-                DELETE: ['SELF']
-            }
-            break;
-        case 'ADMIN':
-            auth = {
-                READ: ['SELF', 'OTHER'],
-                UPDATE: ['SELF', 'OTHER'],
-                DELETE: ['SELF', 'OTHER']
-            }
-            break;
-        default:
-            throw new Error();
-    }
-    role.auth = auth;
-    next();
-})

@@ -8,3 +8,14 @@ Middleware: validateCampground
 Description:
 When used on the edit campground form and there's a Joi validation error, it takes you to /campgrounds/new
 instead of sending you back to the same edit form
+
+ROLES -->> FIXED
+controllers/users.js
+
+When registering we're also updating role DB adding the new user to the users array
+but when using const role = await Role.find({role: req.user.role})
+it does retrieve data, but doesn't allow me to trear role.users as an array since I'm trying
+role.users.push(req.users._id)
+but when I change to const role = await Role.findById(id) <-- hard coding const id = 'sadasda'
+then it all works fine
+I think it will have to do with cursos vs actual documents on MongoDB

@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const Role = require('../models/role');
 
 module.exports.index = async (req, res) => {
     const users = await User.find({});
@@ -69,8 +70,12 @@ module.exports.register = async (req, res, next) => {
         const { username, email, password } = req.body;
         const user = new User({ username, email });
         const registeredUser = await User.register(user, password);
-        req.login(registeredUser, error => {
+        req.login(registeredUser, async error => {
             if (error) return next(error);
+            const role = await Role.findOne({ role: req.user.role }); //Saving user into role db
+            console.log(role);                                        //Saving user into role db
+            role.users.push(req.user._id);                            //Saving user into role db
+            await role.save();                                        //Saving user into role db
             req.flash('success', 'Welcome to Yelp Camp!');
             res.redirect('/campgrounds');
         })
