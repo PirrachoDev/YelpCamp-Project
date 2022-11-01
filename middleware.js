@@ -3,7 +3,6 @@ const User = require('./models/user');
 const Review = require('./models/review');
 const ExpressError = require('./utils/ExpressError');
 const { JoiCampgroundSchema, JoiUserSchema, JoiReviewSchema } = require('./JoiSchemas');
-const { roles } = require('./roles');
 
 
 module.exports.isLoggedIn = (req, res, next) => {

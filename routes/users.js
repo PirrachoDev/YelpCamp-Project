@@ -8,15 +8,15 @@ const { isAuthorized } = require('../middlewares/users');
 const userController = require('../controllers/users');
 
 router.route('/users') //ADD MIDDLEWARE AUTH LATER
-    .get(isLoggedIn, isAuthorized('SHOW'), asyncCatcher(userController.index))
+    .get(isLoggedIn, isAuthorized('READ'), asyncCatcher(userController.index))
 
 router.route('/users/:userId')
-    .get(isLoggedIn, isAuthorized('SHOW'), asyncCatcher(userController.showUser))
+    .get(isLoggedIn, isAuthorized('READ'), asyncCatcher(userController.showUser))
     .put(isLoggedIn, isAuthorized('UPDATE'), userController.updateUser)
     .delete(isLoggedIn, isAuthorized('DELETE'), userController.deleteUser)
 
 router.route('/users/:userId/edit')
-    .get(isLoggedIn, isAuthorized('SHOW'), userController.renderEditForm)
+    .get(isLoggedIn, isAuthorized('READ'), userController.renderEditForm)
 
 router.route('/register')
     .get(userController.renderRegisterForm)

@@ -19,3 +19,8 @@ role.users.push(req.users._id)
 but when I change to const role = await Role.findById(id) <-- hard coding const id = 'sadasda'
 then it all works fine
 I think it will have to do with cursos vs actual documents on MongoDB
+
+NEXT STEPS
+1- When editing a user and changing its role, we have to delete the userId
+ from the old role and add it to the new role
+Work will take place most likely into /controllers/users.js
