@@ -46,8 +46,17 @@ module.exports.showUser = async (req, res, next) => {
 module.exports.updateUser = async (req, res, next) => {
     try {
         const { userId } = req.params;
-        await User.findByIdAndUpdate(userId, req.body);
         const user = await User.findById(userId);
+        const oldRole = user.role;
+        const newRole = req.body.role;
+        await Role.findOneAndUpdate(
+            { role: oldRole },
+            { $pull: { users: userId } }
+        ); //Deleting user from old role db
+        const role = await Role.findOne({ role: newRole });
+        role.users.push(userId); //Adding user to the new role db
+        await role.save();
+        await User.findByIdAndUpdate(userId, req.body);
         req.flash('success', 'User info updated');
         res.redirect('/campgrounds');
     }
@@ -56,6 +65,8 @@ module.exports.updateUser = async (req, res, next) => {
     }
 }
 
+//await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+//await Review.findByIdAndDelete(reviewId);
 module.exports.deleteUser = (req, res) => {
     req.flash('error', 'User deleted');
     res.redirect('/users');
@@ -70,11 +81,11 @@ module.exports.register = async (req, res, next) => {
         const { username, email, password } = req.body;
         const user = new User({ username, email });
         const registeredUser = await User.register(user, password);
+        const role = await Role.findOne({ role: registeredUser.role }); //Saving user into role db
+        role.users.push(registeredUser._id);                                  //Saving user into role db
+        await role.save();                                              //Saving user into role db
         req.login(registeredUser, async error => {
             if (error) return next(error);
-            const role = await Role.findOne({ role: req.user.role }); //Saving user into role db
-            role.users.push(req.user._id);                            //Saving user into role db
-            await role.save();                                        //Saving user into role db
             req.flash('success', 'Welcome to Yelp Camp!');
             res.redirect('/campgrounds');
         })

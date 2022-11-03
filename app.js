@@ -145,10 +145,8 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.get('/fakeUser', async (req, res) => {
-    const user = new User({ email: 'pirrunia_ugly@yahoo.com', username: 'Pirrunia' });
-    const regUser = await User.register(user, 'Pirrunia@2022');
-    res.send(regUser);
+app.get('/modals', async (req, res) => {
+    res.render('modals');
 })
 
 //NOT FOUND

@@ -20,7 +20,20 @@ but when I change to const role = await Role.findById(id) <-- hard coding const 
 then it all works fine
 I think it will have to do with cursos vs actual documents on MongoDB
 
-NEXT STEPS
+NEXT STEPS -->> DONE!
 1- When editing a user and changing its role, we have to delete the userId
  from the old role and add it to the new role
 Work will take place most likely into /controllers/users.js
+
+NEXT STEPS
+*Edit Role field only available if Mod or higher.
+*Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
+*Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
+ having set other admin first.
+
+ WORKING FRONT END
+ Logic related to delete buttons, I want to use Bootstrap modals becauser they look good, that's 
+ why I have to change the approach
+ Now I have to go to the edit user page to delete a user, for the params to not get messed up
+ thanks to the modals
+ It's already functional but it may needs some tweaks
