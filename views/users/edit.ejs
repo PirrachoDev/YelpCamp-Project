@@ -30,48 +30,43 @@
                                 Please enter a valid email.
                             </div>
                         </div>
+                      <% if (currentUser && (currentUser.role == "MODERATOR" || currentUser.role == "ADMIN")) {%>
                         <div class="mb-3">
                             <label class="form-label" for="role">Role</label>
-                            <select class="form-select" name="role" aria-label="Default select example">
+                            <select class="form-select" name="role" aria-label="select role" id="roleSelect">
                                 <option value="USER">User</option>
                                 <option value="MODERATOR">Moderator</option>
                                 <option value="ADMIN">Administrator</option>
-                              </select>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
-                            <div class="invalid-feedback">
-                                Please enter a valid password.
-                            </div>
+                            </select>
                         </div>
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-success">Update</button>
+                      <% } %>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-success mx-2">Update</button>
                         </form>
                         <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
-                            <!-- Button trigger modal -->
-<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteUser">
-    Delete
-  </button>
+                          <!-- Button trigger modal -->
+                          <button type="button" class="btn btn-danger mx-2" data-bs-toggle="modal" data-bs-target="#DeleteUser">
+                            Delete
+                          </button>
   
-  <!-- Modal -->
-  <div class="modal fade" id="DeleteUser" tabindex="-1" aria-labelledby="DeleteUserWarning" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="DeleteUserWarning">Warning!</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Are you sure you want to delete this account? <br> This step cannot be undo!
-        </div>
-        <div class="modal-footer">
-          <input type="hidden" name = "user_id" value="<%= user._id %>">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-danger">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
+                          <!-- Modal -->
+                          <div class="modal fade" id="DeleteUser" tabindex="-1" aria-labelledby="DeleteUserWarning" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h1 class="modal-title fs-5" id="DeleteUserWarning">Warning!</h1>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  Are you sure you want to delete this account? <br> This step cannot be undo!
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn btn-danger">Delete</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </form>
                         </div>
                     

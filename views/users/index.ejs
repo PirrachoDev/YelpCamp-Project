@@ -16,11 +16,7 @@
                             <td><a href="/users/<%= user._id %>"><%= user.username %></a></td>
                             <td><%= user.email %></td>
                             <td><%= user.role %></td>
-                            <td><a href="/users/<%= user._id %>/edit">Edit</a>||
-                            <form action="/users/<%= user._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-sm btn-danger">Delete</button>
-                            </form>
-                            </td>
+                            <td><a class = "btn btn-sm btn-primary" href="/users/<%= user._id %>/edit">Edit</a></td>
                         </tr>
                     <% } %> 
                 </table>

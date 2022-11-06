@@ -25,15 +25,21 @@ NEXT STEPS -->> DONE!
  from the old role and add it to the new role
 Work will take place most likely into /controllers/users.js
 
-NEXT STEPS
-*Edit Role field only available if Mod or higher.
-*Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
-*Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
- having set other admin first.
-
- WORKING FRONT END
+WORKING FRONT END--->> Pending
  Logic related to delete buttons, I want to use Bootstrap modals becauser they look good, that's 
  why I have to change the approach
  Now I have to go to the edit user page to delete a user, for the params to not get messed up
  thanks to the modals
  It's already functional but it may needs some tweaks
+
+SHOW USER PAGE
+*We can take this website Replit example, its profile page looks good enough
+
+NEXT STEPS--->> In progress
+*Edit Role field only available if Mod or higher.--->> DONE!
+*Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
+*Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
+ having set other admin first.
+
+
+
