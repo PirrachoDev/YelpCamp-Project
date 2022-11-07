@@ -18,7 +18,8 @@ const ExpressError = require('./utils/ExpressError');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
 //const dbUrl = process.env['DB_URL'] || 'mongodb://localhost:27017/yelp-camp'; Replit
-const dbUrl = process.env.DB_URL // || 'mongodb://localhost:27017/yelp-camp'; //VSCode
+//const dbUrl = process.env.DB_URL // || 'mongodb://localhost:27017/yelp-camp'; //VSCode
+const dbUrl = process.env.DB_URL;
 
 const campgroundsRoutes = require('./routes/campgrounds');
 const reviewsRoutes = require('./routes/reviews');
