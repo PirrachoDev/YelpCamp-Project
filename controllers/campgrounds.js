@@ -1,6 +1,7 @@
 const Campground = require('../models/campground');
 const { cloudinary } = require('../cloudinary/index');
-const mapBoxToken = process.env['MAPBOX_TOKEN'];
+const mapBoxToken = process.env.MAPBOX_TOKEN; //VSCode
+//const mapBoxToken = process.env['MAPBOX_TOKEN']; Replit
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geoCoder = mbxGeocoding({ accessToken: mapBoxToken });
 

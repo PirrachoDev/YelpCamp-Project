@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 const Campground = require('../models/campground');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
-const dbUrl = process.env['DB_URL'];
+//const dbUrl = process.env['DB_URL']; Replit
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'; //VSCode
+
 
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
@@ -15,6 +17,8 @@ db.once('open', () => {
   console.log('DATABASE CONNECTED');
 });
 
+//const authorVariable = '633e5b8d5ee5cd0cba28950e'; Replit
+const authorVariable = '6360b04053fa91a4e9fa5a2d'; //VSCode
 const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
@@ -23,7 +27,7 @@ const seedDB = async () => {
     const random1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * 20) + 10;
     const camp = new Campground({
-      author: '633e5b8d5ee5cd0cba28950e',
+      author: authorVariable,
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       geometry: {
