@@ -31,6 +31,10 @@ WORKING FRONT END--->> Pending
  Now I have to go to the edit user page to delete a user, for the params to not get messed up
  thanks to the modals
  It's already functional but it may needs some tweaks
+*Working on /views/campgrounds/index.ejs
+  implementing pagination, it's working, I have to work on the logic for bootstrap pagination at the bottom, 
+  work on previous and next behaviour if there is nothing prior nor after the currentPage
+  What about limit? I mean websites such as Encuentra24 let you choose how many results you want to display
 
 SHOW USER PAGE
 *We can take this website Replit example, its profile page looks good enough
@@ -40,6 +44,8 @@ NEXT STEPS--->> In progress
 *Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
 *Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
  having set other admin first.
+
+
 
 
 
