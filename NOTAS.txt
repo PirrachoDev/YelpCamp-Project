@@ -25,15 +25,20 @@ NEXT STEPS -->> DONE!
  from the old role and add it to the new role
 Work will take place most likely into /controllers/users.js
 
-WORKING FRONT END--->> Pending
+WORKING FRONT END--->> DONE
  Logic related to delete buttons, I want to use Bootstrap modals becauser they look good, that's 
  why I have to change the approach
  Now I have to go to the edit user page to delete a user, for the params to not get messed up
  thanks to the modals
  It's already functional but it may needs some tweaks
-*Working on /views/campgrounds/index.ejs
+
+*WORKING on /views/campgrounds/index.ejs -->> In progress
   implementing pagination, it's working, I have to work on the logic for bootstrap pagination at the bottom, 
   work on previous and next behaviour if there is nothing prior nor after the currentPage
+  It seems like we will have to implement protection against invalid previous and next buttons on controller level, since
+  someone easily can enter an invalid query (?page=0) and return an error.
+  but is also recomended to do it at front end level too. Here in front end, what happends if there is only 1 page? bottom page indicators will show
+  routing to undefined endpoints. CHECK THIS OUT!
   What about limit? I mean websites such as Encuentra24 let you choose how many results you want to display
 
 SHOW USER PAGE
