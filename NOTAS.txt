@@ -45,7 +45,7 @@ SHOW USER PAGE
 *We can take this website Replit example, its profile page looks good enough
 
 BACK END --->> In progress
-*Edit Role field only available if Mod or higher. (Front end is done)
+*Edit Role field only available if Mod or higher. -->> (Front end is done) (Back end is done)
 *Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
 *Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
  having set other admin first.
