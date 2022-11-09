@@ -32,7 +32,7 @@ WORKING FRONT END--->> DONE
  thanks to the modals
  It's already functional but it may needs some tweaks
 
-*WORKING on /views/campgrounds/index.ejs -->> In progress
+*WORKING FRONT END on /views/campgrounds/index.ejs -->> In progress
   implementing pagination, it's working, I have to work on the logic for bootstrap pagination at the bottom, 
   work on previous and next behaviour if there is nothing prior nor after the currentPage
   It seems like we will have to implement protection against invalid previous and next buttons on controller level, since
@@ -44,8 +44,8 @@ WORKING FRONT END--->> DONE
 SHOW USER PAGE
 *We can take this website Replit example, its profile page looks good enough
 
-NEXT STEPS--->> In progress
-*Edit Role field only available if Mod or higher.--->> DONE!
+BACK END --->> In progress
+*Edit Role field only available if Mod or higher. (Front end is done)
 *Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
 *Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
  having set other admin first.

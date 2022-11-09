@@ -48,7 +48,9 @@ module.exports.updateUser = async (req, res, next) => {
     const { userId } = req.params;
     const user = await User.findById(userId);
     const newRole = req.body.role;
-    if (newRole) {
+    if (newRole && (req.user.role !== "USER")) { //Here it checks if current user is mod or admin
+      user.role = newRole;
+      await user.save();                         //We save user first in case user injects invalid role: ADMINS, etc
       const oldRole = user.role;
       await Role.findOneAndUpdate(
         { role: oldRole },
@@ -58,7 +60,9 @@ module.exports.updateUser = async (req, res, next) => {
       role.users.push(userId); //Adding user to the new role db
       await role.save();
     }
-    await User.findByIdAndUpdate(userId, req.body);
+    user.username = req.body.username;
+    user.email = req.body.email;
+    await user.save();
     req.flash('success', 'User info updated');
     res.redirect('/campgrounds');
   }
