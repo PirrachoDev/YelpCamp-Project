@@ -49,8 +49,22 @@ BACK END --->> In progress
 *Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
 *Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
  having set other admin first.
+what's going on with deleteUser controller???
 
+DELETE CONTROLLER -->> In progress
+We will use User.findOneAndDelete, once the user has been deleted it should go to a model middleware like the one used on Campground model
+I am concerning about chained post middlewares, will that be needed? I mean this is the workflow in my mind:
+1- Delete the User
+2- Delete all campgrounds owned by that user
+3- Delete all reviews on all of the campgrounds deleted... here is where I want to know if I have to setup another middleware or will the reviews get deleted by the
+    existing middleware into the campground model? :thinkingEmojiGoesHere
 
+USER NEW FIELD -->> Pending
+The Delete User logic is making me think, a "campgrounds" property/field on the Users model might be helpful, a User may own many campgrounds
+but a campground can have only one Owner, each user will have an array of campgrounds, so once the user is deleted, we will get a 'doc' returned and
+we can use it in the post middleware
 
+DELETE CAMPGROUND-->> Bugs!
+Clearing online services like cloudinary is not being done with the current code, check Update Campground to learn about it
 
 

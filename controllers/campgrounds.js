@@ -1,4 +1,5 @@
 const Campground = require('../models/campground');
+const User = require('../models/user');
 const { cloudinary } = require('../cloudinary/index');
 const mapBoxToken = process.env.MAPBOX_TOKEN; //VSCode
 //const mapBoxToken = process.env['MAPBOX_TOKEN']; Replit
@@ -37,6 +38,9 @@ module.exports.createCampground = async (req, res, next) => {
   newCamp.images = req.files.map(file => ({ url: file.path, filename: file.filename }));
   newCamp.author = req.user._id;
   await newCamp.save();
+  const user = await User.findById(req.user._id); //New: Adding campground to user db
+  user.campgrounds.push(newCamp);                 //New: Adding campground to user db
+  await user.save();                              //New: Adding campground to user db
   req.flash('success', 'Successfully made a new campground');
   res.redirect(`/campgrounds/${newCamp._id}`);
 }

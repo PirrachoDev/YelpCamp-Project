@@ -73,9 +73,11 @@ module.exports.updateUser = async (req, res, next) => {
 
 //await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
 //await Review.findByIdAndDelete(reviewId);
-module.exports.deleteUser = (req, res) => {
+module.exports.deleteUser = async (req, res) => {
+  const {userId} = req.params;
+  await User.findByIdAndDelete(userId);
   req.flash('error', 'User deleted');
-  res.redirect('/users');
+  res.redirect('/campgrounds');
 }
 
 module.exports.renderRegisterForm = (req, res) => {

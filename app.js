@@ -17,8 +17,8 @@ const User = require('./models/user');
 const ExpressError = require('./utils/ExpressError');
 const mongoSanitize = require('express-mongo-sanitize');
 const helmet = require('helmet');
-const dbUrl = /* process.env.DB_URL  || */'mongodb://localhost:27017/yelp-camp'; // VSCode
-//const dbUrl = process.env['DB_URL'] // || 'mongodb://localhost:27017/yelp-camp'; // Replit
+//const dbUrl = /* process.env.DB_URL  || */'mongodb://localhost:27017/yelp-camp'; // VSCode
+const dbUrl = process.env['DB_URL'] // || 'mongodb://localhost:27017/yelp-camp'; // Replit
 
 const campgroundsRoutes = require('./routes/campgrounds');
 const reviewsRoutes = require('./routes/reviews');
@@ -56,7 +56,7 @@ const store = MongoStore.create({
   touchAfter: 24 * 60 * 60
 });
 
-store.on('error', function (e) {
+store.on('error', function(e) {
   console.log('SESSION STORE ERROR', e)
 });
 
