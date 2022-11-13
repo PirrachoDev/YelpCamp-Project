@@ -42,7 +42,7 @@ WORKING FRONT END--->> DONE
   routing to undefined endpoints. CHECK THIS OUT!
   *What about limit? I mean websites such as Encuentra24 let you choose how many results you want to display
 
-SHOW USER PAGE -->> In progress
+SHOW USER PAGE -->> DONE
 *We can take this website Replit example, its profile page looks good enough
 
 BACK END --->> In progress

@@ -1,18 +1,18 @@
 <% layout('layouts/boilerplate') %> 
   <div class="card">
-    <img src="https://res.cloudinary.com/pirrachodev/image/upload/v1668144859/YelpCamp/lmpefgpwzyg3meul7ipg.jpg" 
-      alt="banner" class="card-img-top" style="height: 15rem;">
+    <img src="https://images.unsplash.com/photo-1575908524891-b0bdd2b99f90?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80" 
+      alt="banner" class="card-img-top" style="height: 15rem; object-fit: cover">
     <div class="card-body">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
           <div class="card">
-            <img src="https://res.cloudinary.com/pirrachodev/image/upload/v1668145322/YelpCamp/cqdxbtwkifzyntmshwcr.jpg"
+            <img id="profile-picture" src="https://res.cloudinary.com/pirrachodev/image/upload/v1668145322/YelpCamp/cqdxbtwkifzyntmshwcr.jpg"
              alt="profile" class="card-img-top">
              <div class="card-header">
               <h4><%= user.username %></h4>
              </div>
              <div class="card-body">
-                <h6 class="card-title">About you:</h6>
+                <h6 class="card-title">About me:</h6>
                 <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima, molestiae. Maiores perferendis
                 placeat error quo optio cum sapiente minima fuga illo quibusdam mollitia tempora, similique
                 nulla quisquam doloremque consequuntur omnis?</p>
@@ -22,9 +22,31 @@
              </div>
           </div>
         </div>
+        <div class="col-md-9">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">My Campgrounds</h3>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    <% for (let camp of campgrounds) { %> 
+                        <tr scope = "row">
+                            <td><%= camp.title %></td>
+                            <td><%= camp.location %></td>
+                            <td><a class = "btn btn-sm btn-primary" href="/campgrounds/<%= camp._id %>">View</a></td>
+                        </tr>
+                    <% } %> 
+                </table>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-md-8">
-
       </div>
     </div>
   </div>

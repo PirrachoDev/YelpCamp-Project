@@ -28,12 +28,13 @@ module.exports.renderEditForm = async (req, res, next) => {
 module.exports.showUser = async (req, res, next) => {
   try {
     const { userId } = req.params;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate('campgrounds');
     if (!user) {
       req.flash('error', 'User could not be found...');
       res.redirect('/users')
     } else {
-      res.render('users/show', { user })
+      const { campgrounds } = user;
+      res.render('users/show', { user, campgrounds });
     }
   }
   catch (error) {
