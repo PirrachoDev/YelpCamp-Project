@@ -4,8 +4,8 @@ const User = require('../models/user');
 const Review = require('../models/review');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
-const dbUrl = process.env['DB_URL']; //Replit
-//const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'; //VSCode
+//const dbUrl = process.env['DB_URL']; //Replit
+const dbUrl = /*process.env.DB_URL || */'mongodb://localhost:27017/yelp-camp'; //VSCode
 
 
 mongoose.connect(dbUrl, {
@@ -19,14 +19,14 @@ db.once('open', () => {
   console.log('DATABASE CONNECTED');
 });
 
-const authorVariable = '633e5b8d5ee5cd0cba28950e'; //Replit
-//const authorVariable = '6360b04053fa91a4e9fa5a2d'; //VSCode
+//const authorVariable = '633e5b8d5ee5cd0cba28950e'; //Replit
+const authorVariable = '6360b04053fa91a4e9fa5a2d'; //VSCode
 const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
   await Campground.deleteMany({});
   await Review.deleteMany({});
-  await User.findByIdAndUpdate(authorVariable, {campgrounds: []});
+  await User.findByIdAndUpdate(authorVariable, { campgrounds: [] });
   for (let i = 0; i < 50; i++) {
     const random1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * 20) + 10;

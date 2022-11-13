@@ -71,11 +71,23 @@ module.exports.updateUser = async (req, res, next) => {
   }
 }
 
-//await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
-//await Review.findByIdAndDelete(reviewId);
+/*
+UserSchema.post('findOneAndDelete', async function (doc) {
+  if (doc) {
+    const campgrounds = doc.campgrounds;
+    console.log(campgrounds);
+    for (let camp of campgrounds) {
+      const dbCamp = Campground.findById(camp._id);
+      console.log(dbCamp.reviews);
+      await Review.remove({ _id: { $in: dbCamp.reviews } })
+    }
+    Campground.remove({ _id: { $in: campgrounds } });
+  }
+})
+*/
 module.exports.deleteUser = async (req, res) => {
-  const {userId} = req.params;
-  await User.findByIdAndDelete(userId);
+  const { userId } = req.params;
+  const user = await User.findByIdAndDelete(userId);
   req.flash('error', 'User deleted');
   res.redirect('/campgrounds');
 }

@@ -33,38 +33,44 @@ WORKING FRONT END--->> DONE
  It's already functional but it may needs some tweaks
 
 *WORKING FRONT END on /views/campgrounds/index.ejs -->> In progress
+*WORKING BACK END on /views/campgrounds/index.ejs -->> DONE
   implementing pagination, it's working, I have to work on the logic for bootstrap pagination at the bottom, 
   work on previous and next behaviour if there is nothing prior nor after the currentPage
   It seems like we will have to implement protection against invalid previous and next buttons on controller level, since
   someone easily can enter an invalid query (?page=0) and return an error.
   but is also recomended to do it at front end level too. Here in front end, what happends if there is only 1 page? bottom page indicators will show
   routing to undefined endpoints. CHECK THIS OUT!
-  What about limit? I mean websites such as Encuentra24 let you choose how many results you want to display
+  *What about limit? I mean websites such as Encuentra24 let you choose how many results you want to display
 
-SHOW USER PAGE
+SHOW USER PAGE -->> In progress
 *We can take this website Replit example, its profile page looks good enough
 
 BACK END --->> In progress
-*Edit Role field only available if Mod or higher. -->> (Front end is done) (Back end is done)
+*Edit Role field only available if Mod or higher. -->> (Front end is DONE) (Back end is DONE)
 *Mod cannot edit to be an admin, he can only edit from user to mod and viceversa.
 *Admin can make all changes, if there is only 1 admin, this cannot be degraded to mod or user without
  having set other admin first.
 what's going on with deleteUser controller???
 
-DELETE CONTROLLER -->> In progress
-We will use User.findOneAndDelete, once the user has been deleted it should go to a model middleware like the one used on Campground model
+DELETE CONTROLLER -->> DONE
+We will use User.findOneAndDelete, once the user has been deleted it should go to a model middleware like the
+ one used on Campground model
 I am concerning about chained post middlewares, will that be needed? I mean this is the workflow in my mind:
 1- Delete the User
 2- Delete all campgrounds owned by that user
-3- Delete all reviews on all of the campgrounds deleted... here is where I want to know if I have to setup another middleware or will the reviews get deleted by the
+3- Delete all reviews on all of the campgrounds deleted... here is where I want to know if I have to setup
+ another middleware or will the reviews get deleted by the
     existing middleware into the campground model? :thinkingEmojiGoesHere
 
-USER NEW FIELD -->> Pending
-The Delete User logic is making me think, a "campgrounds" property/field on the Users model might be helpful, a User may own many campgrounds
-but a campground can have only one Owner, each user will have an array of campgrounds, so once the user is deleted, we will get a 'doc' returned and
+USER NEW FIELD -->> DONE
+The Delete User logic is making me think, a "campgrounds" property/field on the Users model might be helpful,
+ a User may own many campgrounds
+but a campground can have only one Owner, each user will have an array of campgrounds, so once the user is
+ deleted, we will get a 'doc' returned and
 we can use it in the post middleware
 
 DELETE CAMPGROUND-->> Bugs!
-Clearing online services like cloudinary is not being done with the current code, check Update Campground to learn about it
+Clearing online services like cloudinary is not being done with the current code, check Update Campground
+ to learn about it
 
 

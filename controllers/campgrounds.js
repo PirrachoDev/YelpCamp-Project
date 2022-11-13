@@ -12,14 +12,18 @@ const geoCoder = mbxGeocoding({ accessToken: mapBoxToken });
 }*/
 
 module.exports.index = async (req, res) => {
-  const { page = 1, limit = 5 } = req.query;
+  let { page = 1, limit = 5 } = req.query;
+  const count = await Campground.countDocuments();
+  const totalPages = Math.ceil(count / limit);
+  if (!(page >= 1) || !(page <= totalPages)) {
+    req.flash('error', "Oops! Your page couldn't be found... You're back in the begining.");
+    return res.redirect('/campgrounds');
+  }
   const campgrounds = await Campground.find({})
     .limit(limit * 1)
     .skip((page - 1) * limit)
     .sort({ title: 'asc' })
     .exec();
-  const count = await Campground.countDocuments();
-  const totalPages = Math.ceil(count / limit);
   const currentPage = page;
   res.render('campgrounds/index', { campgrounds, totalPages, currentPage });
 }

@@ -38,14 +38,14 @@ CampgroundSchema.post('findOneAndDelete', async function (doc) {
 });
 */
 
-UserSchema.post('findOneAndDelete', async function(doc) {
-  if (doc){
+UserSchema.post('findOneAndDelete', async function (doc) {
+  if (doc) {
     const campgrounds = doc.campgrounds;
     for (let camp of campgrounds) {
-      const dbCamp = Campground.findById(camp._id);
-      await Review.remove({_id: {$in: dbCamp.reviews}})
-      }
-    Campground.remove({_id: {$in: campgrounds}});
+      const dbCamp = await Campground.findById(camp._id);
+      await Review.remove({ _id: { $in: dbCamp.reviews } })
+    }
+    await Campground.remove({ _id: { $in: campgrounds } });
   }
 })
 
