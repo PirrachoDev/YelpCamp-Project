@@ -1,4 +1,5 @@
 <% layout('/layouts/boilerplate') %>
+<% currentPage = parseInt(currentPage); totalPages = parseInt(totalPages); %>
 <div id="cluster-map"></div>
     <h1>All Campgrounds</h1>
     <% for (let campground of campgrounds) { %>
@@ -31,16 +32,34 @@
     <div class="pagination2022">
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <% if (parseInt(currentPage) <= 1) { %>
-            <li class="page-item disabled"><a class="page-link" href="/campgrounds?page=<%=parseInt(currentPage) - 1%>">Previous</a></li>
-          <% } else { %>
-            <li class="page-item"><a class="page-link" href="/campgrounds?page=<%=parseInt(currentPage) - 1%>">Previous</a></li>
+          <li class="<%=
+            currentPage > 1
+            ? 'page-item' 
+            : 'page-item disabled' %>">
+            <a class="page-link" href="/campgrounds?page=<%=currentPage - 1%>">Previous</a>
+          </li>
+          <% let liTags = totalPages <= 5 ? totalPages : 5 %>
+          <% if (currentPage >= totalPages - liTags + 1) { %>
+            <% for (let i = 1; i <= liTags; i++) { %>
+              <li class="page-item 
+              <%= (totalPages - liTags + i) === currentPage ? 'active' : '' %>">
+                <a href="/campgrounds?page=<%=totalPages - liTags + i%>" class="page-link"><%= totalPages - liTags + i %></a>
+              </li>
+            <% } %>
+          <% } else {%>
+            <% for (let i = 1; i <= liTags; i++) { %>
+              <li class="page-item
+              <%= (currentPage - 1 + i) === currentPage ? 'active' : '' %> ">
+                <a href="/campgrounds?page=<%=currentPage - 1 + i%>" class="page-link"><%= currentPage - 1 + i %></a>
+              </li>
+            <% } %>
           <% } %>
-          <% for (let i = 0; i < 5; i++) { %>
-            <% let count = parseInt(currentPage) + i; %>
-            <li class="page-item"><a class="page-link" href="/campgrounds?page=<%=count%>"><%=count%></a></li>
-          <% } %>
-          <li class="page-item"><a class="page-link" href="/campgrounds?page=<%=parseInt(currentPage) + 5%>">Next</a></li>
+          <li class="<%=
+             currentPage < totalPages
+             ? 'page-item'
+             : 'page-item disabled' %>">
+             <a class="page-link" href="/campgrounds?page=<%=currentPage + 1%>">Next</a>
+          </li>
         </ul>
       </nav>
     </div>

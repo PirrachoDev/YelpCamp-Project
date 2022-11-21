@@ -72,5 +72,4 @@ we can use it in the post middleware
 DELETE CAMPGROUND-->> Bugs!
 Clearing online services like cloudinary is not being done with the current code, check Update Campground
  to learn about it
-
-
+ 
